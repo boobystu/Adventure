@@ -1,0 +1,1 @@
+--get high score from persistent file
