@@ -24,6 +24,7 @@ alphaMax = 1
 doorOptionA = {}
 doorOptionB = {}
 doorOptionC = {}
+pickup = {}
 
 gameState = ""
 
