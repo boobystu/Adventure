@@ -101,10 +101,17 @@ function DisplayHighScores(startXPosition, startYPosition)
 
   local positionY = startYPosition
 
-  local incrementY = 50
+  local incrementY = 25
 
-  for counter = 1, #highScores, 1 do
-    love.graphics.print(NamePlusDots(highScores[counter].name) ..
+  local maxRow = #highScores
+
+  if maxRow > 10 then
+    maxRow = 10
+  end
+
+  for counter = 1, maxRow, 1 do
+    love.graphics.print(counter .. ". " ..
+                      NamePlusDots(highScores[counter].name) ..
                       highScores[counter].score,
                       startXPosition,
                       positionY)

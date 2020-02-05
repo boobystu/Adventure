@@ -20,6 +20,24 @@ function SetupPlayer()
   player.y = 200
   player.h = 10
   player.w = 10
+  player.pickedUpQuestion = true
+  player.location = "room"
+  player.lastQuestionCorrect = false
+  player.lastDoorWalkedThrough = ""
+
+end
+
+function CheckPlayerAnswer()
+
+  player.lastQuestionCorrect = false
+
+  if lastDoorWalkedThrough == "" then
+    return
+  end
+
+  if lastDoorWalkedThrough == question.correctAnswer then
+    player.lastQuestionCorrect = true
+  end
 
 end
 
@@ -32,23 +50,19 @@ function UpdatePlayer()
     if player.y > 0 then
       player.y = player.y - movementSpeed
     else
-      player.y = love.graphics.getHeight()
+      PlayerChangingScreen()
     end
   end
 
   if love.keyboard.isDown("down") then
     if player.y + player.h < love.graphics.getHeight() then
       player.y = player.y + movementSpeed
-    else
-      player.y = 0
     end
   end
 
   if love.keyboard.isDown("left") then
     if player.x > 0 then
       player.x = player.x - movementSpeed
-    else
-      player.x = love.graphics.getWidth()
     end
 
   end
@@ -56,13 +70,29 @@ function UpdatePlayer()
   if love.keyboard.isDown("right") then
     if player.x + player.w < love.graphics.getWidth() then
       player.x = player.x + movementSpeed
-    else
-      player.x = 0
     end
   end
+
+  CheckForContactWithDoor()
 
   if ContactWithWall() == true then
     player.x = originalX
     player.y = originalY
   end
+end
+
+function PlayerChangingScreen()
+  
+  player.x = love.graphics.getWidth() / 2
+  player.y = love.graphics.getHeight()
+
+  if player.location == "room" then
+    player.location = "corridor"
+    player.pickedUpQuestion = false
+  else
+    player.location = "room"
+  end
+
+  GetNextQuestion()
+
 end

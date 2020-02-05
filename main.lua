@@ -4,27 +4,40 @@ require "collision"
 require "GraphicsFunctions"
 require "Player"
 require "Walls"
+require "Questions"
+require "ScrollOrTreasure"
 
 highScores = {}
 fonts = {}
 player = {}
 room = {}
-walls = {}
+roomWalls = {}
+corridorWalls = {}
 doors = {}
+questions = {}
+question = {}
 titleColour = {}
 titleColour.red = 0.01
 titleColour.green = 0.33
 titleColour.blue = 0.66
+alphaMax = 1
+doorOptionA = {}
+doorOptionB = {}
+doorOptionC = {}
 
 gameState = ""
 
 function love.load(arg)
 
+  SetupDoorOptions()
+
   LoadFont()
 
   LoadHighScores()
 
-  BuildWalls()
+  BuildRoomWalls()
+
+  BuildCorridorWalls()
 
   SetupPlayer()
 

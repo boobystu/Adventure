@@ -1,24 +1,43 @@
-alphaMax = 1
+require "ScrollOrTreasure"
+
 redColourDirection = "up"
 greenColourDirection = "up"
 blueColourDirection = "up"
 
+titleX = 170
+titleY = 60
+instructionX = 345
+instructionY = 170
+highScoreX = 260
+highScoreY = 300
 
 function DisplayGame()
 
-  DisplayWalls()
-  DisplayDoors()
-  DisplayBackground()
+  if player.location == "room" then
+    DisplayRoomWalls()
+    DisplayRoomBackground()
+    DisplayQuestion()
+  else
+    DisplayCorridorWalls()
+    DisplayCorridorBackground()
+    if player.lastDoorWalkedThrough == question.correctAnswer then
+      DisplayScrollOrTreasure("treasure")
+    else
+      DisplayScrollOrTreasure("scroll")
+    end
+  end
   DisplayPlayer()
 
+end
+
+function DisplayQuestion()
 end
 
 function DisplayStartScreen()
 
   DisplayTitle()
 
-  DisplayHighScores(100, 100)
-
+  DisplayHighScores(highScoreX, highScoreY)
 end
 
 function DisplayTitle()
@@ -27,11 +46,11 @@ function DisplayTitle()
 
   love.graphics.setColor(titleColour.red, titleColour.green, titleColour.blue, alphaMax)
 
-  love.graphics.print("The Trails of IRIS", 170, 60)
+  love.graphics.print("The Trails of IRIS", titleX, titleY)
 
   love.graphics.setFont(fonts.zeldaInstructions)
 
-  love.graphics.print("Insert Coin", 345, 170)
+  love.graphics.print("Insert Coin", instructionX, instructionY)
 
   AlterTitleColours()
 
@@ -40,15 +59,30 @@ function DisplayTitle()
   love.graphics.setFont(fonts.large)
 end
 
-function DisplayWalls()
+function DisplayRoomWalls()
 
   love.graphics.setColor(0.35, 0.07,0.05, alphaMax)
 
-  for i = 1, #walls, 1 do
+  for i = 1, #roomWalls, 1 do
 
-    local wall = walls[i]
+    local roomWall = roomWalls[i]
 
-    love.graphics.rectangle("fill", wall.xPosition, wall.yPosition, wall.width, wall.height)
+    love.graphics.rectangle("fill", roomWall.xPosition, roomWall.yPosition, roomWall.width, roomWall.height)
+
+  end
+
+  love.graphics.setColor(1, 1, 1, alphaMax)
+end
+
+function DisplayCorridorWalls()
+
+  love.graphics.setColor(0.35, 0.07,0.05, alphaMax)
+
+  for i = 1, #corridorWalls, 1 do
+
+    local corridorWall = corridorWalls[i]
+
+    love.graphics.rectangle("fill", corridorWall.xPosition, corridorWall.yPosition, corridorWall.width, corridorWall.height)
 
   end
 
@@ -60,7 +94,11 @@ function DisplayDoors()
   --todo
 end
 
-function DisplayBackground()
+function DisplayRoomBackground()
+  --todo
+end
+
+function DisplayCorridorBackground()
   --todo
 end
 
@@ -109,5 +147,4 @@ function AlterTitleColours()
   elseif titleColour.blue <= 0.1 then
     blueColourDirection = "up"
   end
-
 end
