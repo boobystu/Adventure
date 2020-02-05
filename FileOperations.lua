@@ -13,7 +13,7 @@ function ReadQuestionFile()
 
   for line in file:lines() do
     if line ~= "" then
-      table.insert(questions, line)
+      table.insert(allQuestions, line)
     end
   end
   file:close()
