@@ -1,3 +1,5 @@
+require "FileOperations"
+
 highScoreFile = "\\\\STKFPS1\\Data\\Users\\StuartYoung\\highscores.txt"
 
 numberOfHighScores = 0
@@ -11,6 +13,10 @@ end
 
 function AddHighScore(name, score)
 
+  if FileExists(highScoreFile) == false then
+    return
+  end
+
   local file = io.open(highScoreFile, "a")
 
   file:write(name .. "," .. score .. "\n")
@@ -19,6 +25,11 @@ function AddHighScore(name, score)
 end
 
 function ReadHighScoreFile()
+
+  if FileExists(highScoreFile) == false then
+    return
+  end
+
   local file = io.open(highScoreFile, "r")
 
   for line in file:lines() do
@@ -86,7 +97,7 @@ function string:split( inSplitPattern, outResults )
   return outResults
 end
 
-function PrintHighScores(startXPosition, startYPosition)
+function DisplayHighScores(startXPosition, startYPosition)
 
   local positionY = startYPosition
 

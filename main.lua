@@ -1,10 +1,22 @@
 require "Highscore"
 require "TextOperations"
+require "collision"
+require "GraphicsFunctions"
+require "Player"
+require "Walls"
 
 highScores = {}
 fonts = {}
+player = {}
+room = {}
+walls = {}
+doors = {}
+titleColour = {}
+titleColour.red = 0.01
+titleColour.green = 0.33
+titleColour.blue = 0.66
 
---nameAdded = false
+gameState = ""
 
 function love.load(arg)
 
@@ -12,19 +24,28 @@ function love.load(arg)
 
   LoadHighScores()
 
+  BuildWalls()
+
+  SetupPlayer()
+
+  gameState = "StartScreen"
+
 end
 
 function love.update(dt)
 
-  --if nameAdded == false then
-    --AddHighScore("newName", 44444)
-    --nameAdded = true
-  --end
+  if gameState == "InGame" then
+    UpdatePlayer()
+  end
 
 end
 
 function love.draw()
 
-  PrintHighScores(100, 100)
+  if gameState == "StartScreen" then
+    DisplayStartScreen()
+  elseif gameState == "InGame" then
+    DisplayGame()
+  end
 
 end
