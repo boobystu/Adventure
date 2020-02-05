@@ -17,7 +17,6 @@ room = {}
 roomWalls = {}
 corridorWalls = {}
 doors = {}
-questions = {}
 question = {}
 titleColour = {}
 titleColour.red = 0.01
@@ -28,7 +27,9 @@ doorOptionA = {}
 doorOptionB = {}
 doorOptionC = {}
 
-questions = {}
+allQuestions = {}
+currentGameplayQuestions = {}
+numberOfQuestionsPerGame = 5
 questionText = ""
 answerTextA = ""
 answerTextB = ""
@@ -54,7 +55,9 @@ function love.load(arg)
 
   ReadQuestionFile()
 
-  questions = RandomiseQuestionOrder(questions)
+  allQuestions = RandomiseQuestionOrder(allQuestions)
+
+  currentGameplayQuestions = GetFirstNQuestions(allQuestions, numberOfQuestionsPerGame)
 
   gameState = "StartScreen"
 
