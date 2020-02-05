@@ -4,6 +4,7 @@ require "collision"
 require "GraphicsFunctions"
 require "Player"
 require "Walls"
+require "QuestionOperations"
 require "Questions"
 require "ScrollOrTreasure"
 
@@ -25,6 +26,14 @@ doorOptionA = {}
 doorOptionB = {}
 doorOptionC = {}
 
+questions = {}
+questionText = ""
+answerTextA = ""
+answerTextB = ""
+answerTextC = ""
+answerCorrectText = ""
+answerCorrectOption = ""
+
 gameState = ""
 
 function love.load(arg)
@@ -41,6 +50,10 @@ function love.load(arg)
 
   SetupPlayer()
 
+  ReadQuestionFile()
+
+  questions = RandomiseQuestionOrder(questions)
+
   gameState = "StartScreen"
 
 end
@@ -50,6 +63,8 @@ function love.update(dt)
   if gameState == "InGame" then
     UpdatePlayer()
   end
+
+  PopulateQuestionAndAnswers()
 
 end
 
