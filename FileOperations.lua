@@ -7,3 +7,14 @@ function FileExists(fileName)
   end
   return false
 end
+
+function ReadQuestionFile()
+  local file = io.open("questions.txt", "r")
+
+  for line in file:lines() do
+    if line ~= "" then
+      table.insert(questions, line)
+    end
+  end
+  file:close()
+end
