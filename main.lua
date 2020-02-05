@@ -7,6 +7,8 @@ require "Walls"
 require "QuestionOperations"
 require "Questions"
 require "ScrollOrTreasure"
+require "Score"
+require "Thief"
 
 highScores = {}
 fonts = {}
@@ -71,6 +73,8 @@ end
 function love.draw()
 
   if gameState == "StartScreen" then
+    ResetScore()
+    ResetThiefValue()
     DisplayStartScreen()
   elseif gameState == "InGame" then
     DisplayGame()

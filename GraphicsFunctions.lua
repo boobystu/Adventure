@@ -10,6 +10,8 @@ instructionX = 345
 instructionY = 170
 highScoreX = 260
 highScoreY = 300
+scoreX = 10
+scoreY = 10
 
 function DisplayGame()
 
@@ -46,7 +48,7 @@ function DisplayTitle()
 
   love.graphics.setColor(titleColour.red, titleColour.green, titleColour.blue, alphaMax)
 
-  love.graphics.print("The Trails of IRIS", titleX, titleY)
+  love.graphics.print("The Trials of IRIS", titleX, titleY)
 
   love.graphics.setFont(fonts.zeldaInstructions)
 
