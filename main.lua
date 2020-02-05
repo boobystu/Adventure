@@ -5,7 +5,6 @@ require "GraphicsFunctions"
 require "Player"
 require "Walls"
 require "QuestionOperations"
-require "Questions"
 require "ScrollOrTreasure"
 
 highScores = {}
@@ -38,6 +37,8 @@ answerCorrectOption = ""
 gameState = ""
 
 function love.load(arg)
+
+  SetupWindow()
 
   SetupDoorOptions()
 

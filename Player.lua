@@ -1,3 +1,5 @@
+require "ScrollOrTreasure"
+
 movementSpeed = 10
 
 function CheckForGameStart(key)
@@ -68,12 +70,14 @@ function UpdatePlayer()
   end
 
   if love.keyboard.isDown("right") then
-    if player.x + player.w < love.graphics.getWidth() then
+    if player.x + player.w < playingAreaMaxX then
       player.x = player.x + movementSpeed
     end
   end
 
-  CheckForContactWithDoor()
+  CheckForContactWithDoors()
+
+  ContactWithScrollOrTreasure()
 
   if ContactWithWall() == true then
     player.x = originalX
@@ -82,17 +86,21 @@ function UpdatePlayer()
 end
 
 function PlayerChangingScreen()
-  
-  player.x = love.graphics.getWidth() / 2
+
+  if player.location == "corridor" and player.pickedUpQuestion == false then
+    return
+  end
+  player.x = (doorEntranceXCoord + (rectangleWidth / 2)) - (player.w / 2)
   player.y = love.graphics.getHeight()
 
   if player.location == "room" then
     player.location = "corridor"
     player.pickedUpQuestion = false
+    if answerCorrectOption == player.lastDoorWalkedThrough then
+      player.lastQuestionCorrect = true
+    end
   else
     player.location = "room"
   end
-
-  GetNextQuestion()
 
 end

@@ -11,6 +11,12 @@ instructionY = 170
 highScoreX = 260
 highScoreY = 300
 
+playingAreaMaxX = 0
+windowMaxX = 0
+windowMaxY = 0
+questionAreaMinX = 0
+questionAreaMaxX = 0
+
 function DisplayGame()
 
   if player.location == "room" then
@@ -20,11 +26,7 @@ function DisplayGame()
   else
     DisplayCorridorWalls()
     DisplayCorridorBackground()
-    if player.lastDoorWalkedThrough == question.correctAnswer then
-      DisplayScrollOrTreasure("treasure")
-    else
-      DisplayScrollOrTreasure("scroll")
-    end
+    DisplayScrollOrTreasure()
   end
   DisplayPlayer()
 
@@ -87,7 +89,6 @@ function DisplayCorridorWalls()
   end
 
   love.graphics.setColor(1, 1, 1, alphaMax)
-
 end
 
 function DisplayDoors()
@@ -106,6 +107,9 @@ function DisplayPlayer()
   love.graphics.setColor(0.13,0.57,0.86,alphaMax)
 
   love.graphics.rectangle("fill", player.x, player.y, player.w, player.h)
+
+  --love.graphics.print("lastwalkedthrough = " .. player.lastDoorWalkedThrough, player.x, player.y)
+  --love.graphics.print("CorrectQuestionOption = " .. CorrectQuestionOption(), player.x, player.y + 10)
 
   love.graphics.setColor(1,1,1,alphaMax)
 end
@@ -147,4 +151,16 @@ function AlterTitleColours()
   elseif titleColour.blue <= 0.1 then
     blueColourDirection = "up"
   end
+end
+
+function SetupWindow()
+
+  playingAreaMaxX = 785
+  windowMaxX = 1400
+  windowMaxY = 600
+  questionAreaMinX = playingAreaMaxX
+  questionAreaMaxX = windowMaxX
+
+  love.window.setMode(windowMaxX, windowMaxY)
+
 end
