@@ -112,6 +112,18 @@ function LoadImages()
 end
 
 function DisplayQuestion()
+  local yOrigin = 48
+  local xOrigin = questionAreaMinX + scoreX
+  local textWrapLimit = windowMaxX - xOrigin - 24 -- the 24 is just for some padding
+  love.graphics.printf(
+    question.questionText.."\n\n"..
+    "A: "..question.answerTextA.."\n\n"..
+    "B: "..question.answerTextB.."\n\n"..
+    "C: "..question.answerTextC.."\n\n",
+    xOrigin,
+    yOrigin,
+    textWrapLimit,
+    "left")
 end
 
 function DisplayStartScreen()
