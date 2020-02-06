@@ -82,6 +82,7 @@ function DisplayGame()
     DisplayCorridorBackground()
     DisplayScrollOrTreasure()
   end
+  DisplayScore()
   DisplayPlayer()
 
 end
@@ -118,6 +119,15 @@ function DisplayStartScreen()
   DisplayTitle()
 
   DisplayHighScores(highScoreX, highScoreY)
+end
+
+function DisplayScore (args)
+  love.graphics.setFont(fonts.zeldaInstructions)
+  love.graphics.print(
+    "Score: " .. GetScore(),
+    questionAreaMinX + scoreX,
+    scoreY
+  )
 end
 
 function DisplayTitle()
@@ -233,7 +243,7 @@ function SetupWindow()
   playingAreaMaxX = 785
   windowMaxX = 1400
   windowMaxY = 600
-  questionAreaMinX = playingAreaMaxX
+  questionAreaMinX = playingAreaMaxX + 64 -- Wall width
   questionAreaMaxX = windowMaxX
 
   love.window.setMode(windowMaxX, windowMaxY)
