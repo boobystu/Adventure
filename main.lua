@@ -44,6 +44,8 @@ playerName = ""
 
 gameState = ""
 
+tempGameScreenCounter = 0
+
 function love.load(arg)
 
   local joysticks = love.joystick.getJoysticks()
@@ -97,6 +99,8 @@ function love.draw()
     DisplayOptionsScreen()
   elseif gameState == "InGame" then
     DisplayGame()
+  elseif gameState == "EndScreen" then
+    DisplayEndScreen()
   end
 
 end

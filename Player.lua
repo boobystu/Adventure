@@ -1,6 +1,7 @@
 require "ScrollOrTreasure"
 
 movementSpeed = 7
+playerDirection = ""
 
 function EnvIsAlphaNum(sIn)
   return (string.match(sIn,"[^%w]") == nil)
@@ -37,6 +38,22 @@ function CheckForGameStart(key)
   end
 end
 
+-- function CheckForGameStart()
+--   if joystick then
+--     if key == "start" then
+--       gameState = "OptionsScreen"
+--     end
+--   end
+--
+--   if key == "return" then
+--     gameState = "OptionsScreen"
+--   end
+--
+--   if gameState == "OptionsScreen" then
+--     playerName = ""
+--   end
+-- end
+
 function CheckForOptionsScreen(key)
 
   if joystick then
@@ -55,11 +72,26 @@ function CheckForOptionsScreen(key)
 
 end
 
+function CheckForTitleScreen(key)
+
+  if joystick then
+    if key == "start" then
+      gameState = "OptionsScreen"
+    end
+  end
+
+  if key == "return" then
+    gameState = "StartScreen"
+  end
+end
+
 function love.keyreleased(key)
   if gameState == "StartScreen" then
     CheckForOptionsScreen(key)
   elseif gameState == "OptionsScreen" then
     CheckForGameStart(key)
+  elseif gameState == "EndScreen" then
+    CheckForTitleScreen(key)
   end
 
 end
@@ -116,13 +148,7 @@ function UpdatePlayer()
   originalX = player.x
   originalY = player.y
 
-  local playerDirection = ""
-
-  if not joystick then
-    playerDirection = GetKeyboardInput()
-  else
-    playerDirection = GetJoypadInput()
-  end
+  GetMovementInput()
 
   if playerDirection == "up" then
     player.image = player.imageUp
@@ -159,36 +185,43 @@ function UpdatePlayer()
 
   ContactWithScrollOrTreasure()
 
-  ContactWithScrollOrTreasure()
-
   if ContactWithWall() == true then
     player.x = originalX
     player.y = originalY
   end
 end
 
-function GetJoypadInput()
-  if joystick:isGamepadDown("dpleft") then
-    return "left"
-  elseif joystick:isGamepadDown("dpright") then
-    return "right"
-  elseif joystick:isGamepadDown("dpup") then
-    return "up"
-  elseif joystick:isGamepadDown("dpdown") then
-    return "down"
-  end
-end
+function GetMovementInput()
 
-function GetKeyboardInput()
-  if love.keyboard.isDown("up") then
-    return "up"
-  elseif love.keyboard.isDown("down") then
-    return "down"
-  elseif love.keyboard.isDown("left") then
-    return "left"
-  elseif love.keyboard.isDown("right") then
-    return "right"
+  playerDirection = ""
+
+  if joystick then
+
+    if joystick:isGamepadDown("dpleft") then
+      playerDirection = "left"
+    elseif joystick:isGamepadDown("dpright") then
+      playerDirection = "right"
+    elseif joystick:isGamepadDown("dpup") then
+      playerDirection = "up"
+    elseif joystick:isGamepadDown("dpdown") then
+      playerDirection = "down"
+    end
   end
+
+  if playerDirection ~= "" then
+    return
+  end
+
+  if love.keyboard.isDown("up") then
+    playerDirection = "up"
+  elseif love.keyboard.isDown("down") then
+    playerDirection = "down"
+  elseif love.keyboard.isDown("left") then
+    playerDirection = "left"
+  elseif love.keyboard.isDown("right") then
+    playerDirection = "right"
+  end
+
 end
 
 function PlayerChangingScreen()
@@ -207,8 +240,11 @@ function PlayerChangingScreen()
     if answerCorrectOption == player.lastDoorWalkedThrough then
       player.lastQuestionCorrect = true
     end
-  else
+  elseif tempGameScreenCounter < 2 then
     player.location = "room"
+    tempGameScreenCounter = tempGameScreenCounter + 1
+  else
+    gameState = "EndScreen"
   end
 
 end
