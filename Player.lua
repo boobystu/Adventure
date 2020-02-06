@@ -177,6 +177,8 @@ function UpdatePlayer()
 
   ContactWithScrollOrTreasure()
 
+  ContactWithEndScreenScrolls()
+
   if ContactWithWall() == true then
     player.x = originalX
     player.y = originalY
