@@ -136,7 +136,7 @@ end
 function DisplayScore (args)
   love.graphics.setFont(fonts.zeldaInstructions)
   love.graphics.print(
-    "Score: " .. GetScore(),
+    playerName .. "'s Score: " .. GetScore(),
     questionAreaMinX + scoreX,
     scoreY
   )

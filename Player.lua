@@ -13,13 +13,13 @@ function CheckForGameStart(key)
     selectedCharacter = 1
   elseif key == "2" then
     selectedCharacter = 2
-  elseif EnvIsAlphaNum(key) then
+  elseif #key == 1 and EnvIsAlphaNum(key) then
     if #playerName < 8 then
       playerName = playerName .. key
     end
   end
 
-  if selectedCharacter == 0 then
+  if selectedCharacter == 0 and #playerName == 0 then
     return
   end
 
@@ -91,6 +91,8 @@ function love.keyreleased(key)
   elseif gameState == "OptionsScreen" then
     CheckForGameStart(key)
   elseif gameState == "EndScreen" then
+    AddHighScore(playerName, GetScore())
+    LoadHighScores()
     CheckForTitleScreen(key)
   end
 
