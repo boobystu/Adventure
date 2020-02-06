@@ -17,6 +17,7 @@ player = {}
 room = {}
 roomWalls = {}
 corridorWalls = {}
+endWalls = {}
 doors = {}
 question = {}
 titleColour = {}
@@ -63,6 +64,8 @@ function love.load(arg)
 
   BuildCorridorWalls()
 
+  BuildEndWalls()
+
   SetupPlayer()
 
   ReadQuestionFile()
@@ -77,7 +80,7 @@ end
 
 function love.update(dt)
 
-  if gameState == "InGame" then
+  if gameState == "InGame" or gameState == "EndScreen" then
     UpdatePlayer()
   end
 
