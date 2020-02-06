@@ -112,6 +112,7 @@ function LoadImages()
 end
 
 function DisplayQuestion()
+  love.graphics.setFont(fonts.zeldaInstructions)
   local yOrigin = 64
   local xOrigin = questionAreaMinX + scoreX
   local textWrapLimit = windowMaxX - xOrigin - 24 -- the 24 is just for some padding
