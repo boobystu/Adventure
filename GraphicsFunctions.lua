@@ -112,7 +112,7 @@ function LoadImages()
 end
 
 function DisplayQuestion()
-  local yOrigin = 48
+  local yOrigin = 64
   local xOrigin = questionAreaMinX + scoreX
   local textWrapLimit = windowMaxX - xOrigin - 24 -- the 24 is just for some padding
   love.graphics.printf(
@@ -136,8 +136,13 @@ end
 function DisplayScore (args)
   love.graphics.setFont(fonts.zeldaInstructions)
   love.graphics.print(
-    playerName .. "'s Score: " .. GetScore(),
+    playerName .. "'s Treasure: " .. GetScore(),
     questionAreaMinX + scoreX,
+    scoreY
+  )
+  love.graphics.print(
+    "Scrolls Collected: " .. #scrolls,
+    questionAreaMinX + scoreX + 250,
     scoreY
   )
 end
