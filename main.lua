@@ -37,6 +37,7 @@ numberOfQuestionsPerGame = 5
 playerName = ""
 
 scrolls = {}
+endGameScrollLocations = {}
 
 gameState = ""
 
@@ -66,6 +67,8 @@ function love.load(arg)
   SetupPlayer()
 
   ReadQuestionFile()
+
+  PopulateEndGameScrollLocations()
 
   allQuestions = RandomiseQuestionOrder(allQuestions)
 

@@ -1,3 +1,30 @@
 function AddToScrolls()
-  table.insert(scrolls, question)
+
+  local scroll = {}
+  scroll.questionText = question.questionText
+  scroll.answerTextA = question.answerTextA
+  scroll.answerTextB = question.answerTextB
+  scroll.answerTextC = question.answerTextC
+  scroll.answerCorrectText = question.answerCorrectText
+  scroll.answerCorrectOption = question.answerCorrectOption
+
+  local scrollLocationIndex = math.random(1, #endGameScrollLocations)
+  local scrollLocation = table.remove(endGameScrollLocations, scrollLocationIndex)
+  scroll.endScreenXCoord = scrollLocation.x
+  scroll.endScreenYCoord = scrollLocation.y
+  table.insert(scrolls, scroll)
+end
+
+function PopulateEndGameScrollLocations()
+
+  -- TODO Parameterise this to take in number of questions per game and generate that many scrollLocations
+
+  endGameScrollLocations = {}
+
+  table.insert(endGameScrollLocations, {["x"] = 100, ["y"] = 100})
+  table.insert(endGameScrollLocations, {["x"] = 200, ["y"] = 200})
+  table.insert(endGameScrollLocations, {["x"] = 300, ["y"] = 300})
+  table.insert(endGameScrollLocations, {["x"] = 400, ["y"] = 400})
+  table.insert(endGameScrollLocations, {["x"] = 500, ["y"] = 500})
+
 end
