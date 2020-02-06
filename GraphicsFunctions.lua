@@ -11,6 +11,8 @@ instructionX = 345
 instructionY = 170
 highScoreX = 260
 highScoreY = 300
+scoreX = 10
+scoreY = 10
 
 playingAreaMaxX = 0
 windowMaxX = 0
