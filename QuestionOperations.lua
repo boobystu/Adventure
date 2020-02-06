@@ -11,6 +11,7 @@ function PopulateQuestionAndAnswers()
   question.answerTextB = allTextItems[3]
   question.answerTextC = allTextItems[4]
   question.answerCorrectText = allTextItems[5]
+  question.url = allTextItems[6] or "No URL available" -- currently not all questions have urls
 
   if question.answerTextA == question.answerCorrectText then
     question.answerCorrectOption = "A"

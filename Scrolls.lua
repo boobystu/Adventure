@@ -7,7 +7,7 @@ function AddToScrolls()
   scroll.answerTextC = question.answerTextC
   scroll.answerCorrectText = question.answerCorrectText
   scroll.answerCorrectOption = question.answerCorrectOption
-  scroll.url = "SCROLL URL"
+  scroll.url = question.url
   scroll.read = false
 
   local scrollLocationIndex = math.random(1, #endGameScrollLocations)
@@ -27,6 +27,6 @@ function PopulateEndGameScrollLocations()
   table.insert(endGameScrollLocations, {["x"] = 200, ["y"] = 200})
   table.insert(endGameScrollLocations, {["x"] = 300, ["y"] = 300})
   table.insert(endGameScrollLocations, {["x"] = 400, ["y"] = 400})
-  table.insert(endGameScrollLocations, {["x"] = 500, ["y"] = 500})
+  table.insert(endGameScrollLocations, {["x"] = 500, ["y"] = 480})
 
 end
