@@ -140,10 +140,14 @@ function ContactWithWall()
 
   local walls = {}
 
-  if player.location == "room" then
-    walls = roomWalls
+  if gameState == "EndScreen" then
+    walls = endWalls
   else
-    walls = corridorWalls
+    if player.location == "room" then
+      walls = roomWalls
+    else
+      walls = corridorWalls
+    end
   end
 
   for i = 1, #walls, 1 do

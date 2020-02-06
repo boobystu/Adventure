@@ -29,20 +29,32 @@ end
 
 function DisplayEndScreen()
 
-  love.graphics.setFont(fonts.zeldaTitle)
-
-  love.graphics.print("Game Over", playingAreaMaxX * (1/3) + 50, 80)
-
-  love .graphics.setFont(fonts.zeldaInstructions)
-
-  love.graphics.print("Read all the scrolls of knowledge to exit", playingAreaMaxX * (1/3), 150)
-
   DisplayEndWalls()
+
+  DisplayEndScreenScrolls()
 
   DisplayPlayer()
 
   DisplayScore()
+
+end
+
+function DisplayEndScreenScrolls()
+
+  if #scrolls == 0 then
+    return
+  end
+
+  for i=1, #scrolls, 1 do
+    local scroll = scrolls[i]
+
+    love.graphics.draw(images.scrollOpen, scroll.endScreenXCoord, scroll.endScreenXCoord)
+
+  end
+
+  DisplayScore()
   DisplayEndInstructions()
+
 end
 
 function DisplayCharacterOptions()
