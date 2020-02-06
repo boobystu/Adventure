@@ -102,6 +102,8 @@ function SetupPlayer()
 
   SetupPlayerSprite()
 
+  ResetForNewGame()
+
 end
 
 function SetupPlayerSprite()
@@ -235,6 +237,15 @@ function PlayerChangingScreen()
     tempGameScreenCounter = tempGameScreenCounter + 1
   else
     gameState = "EndScreen"
+    ResetForNewGame()
   end
 
+end
+
+function ResetForNewGame()
+  player.x = playingAreaMaxX / 2
+  player.y = love.graphics.getHeight() / 2
+  tempGameScreenCounter = 0
+  player.location = "room"
+  PlayMenuMusic()
 end

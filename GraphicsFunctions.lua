@@ -179,7 +179,16 @@ function DisplayDoors()
 end
 
 function DisplayRoomBackground()
-  --todo
+
+  love.graphics.setFont(fonts.floorMarkers)
+  love.graphics.setColor(1, 1, 1, 0.3)
+
+  love.graphics.print("A", doorAXCoord, 60)
+  love.graphics.print("B", doorBXCoord, 60)
+  love.graphics.print("C", doorCXCoord, 60)
+
+  love.graphics.setColor(1, 1, 1, alphaMax)
+
 end
 
 function DisplayCorridorBackground()
