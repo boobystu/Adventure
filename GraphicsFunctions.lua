@@ -36,7 +36,7 @@ function DisplayEndScreen()
   love .graphics.setFont(fonts.zeldaInstructions)
 
   love.graphics.print("Press start to play again", playingAreaMaxX * (1/3), 250)
-
+  DisplayScore()
 end
 
 function DisplayCharacterOptions()
