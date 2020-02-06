@@ -101,13 +101,15 @@ function DisplayHighScores(startXPosition, startYPosition)
 
   local positionY = startYPosition
 
-  local incrementY = 25
+  local incrementY = 30
 
   local maxRow = #highScores
 
   if maxRow > 10 then
     maxRow = 10
   end
+
+  love.graphics.setFont(fonts.larger)
 
   for counter = 1, maxRow, 1 do
     love.graphics.print(counter .. ". " ..

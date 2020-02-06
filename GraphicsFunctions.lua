@@ -9,8 +9,8 @@ titleX = 170
 titleY = 60
 instructionX = 345
 instructionY = 170
-highScoreX = 260
-highScoreY = 300
+highScoreX = 150
+highScoreY = 250
 scoreX = 10
 scoreY = 10
 
@@ -41,7 +41,9 @@ end
 
 function DisplayCharacterOptions()
 
-  love.graphics.setFont(fonts.large)
+  love.graphics.setFont(fonts.larger)
+
+  love.graphics.print("Select a character by pressing 1 or 2", playingAreaMaxX * (1/3) - 90, 100)
 
   love.graphics.print("1", playingAreaMaxX * (1/3), 150)
   love.graphics.print("2", playingAreaMaxX * (2/3), 150)
@@ -49,14 +51,18 @@ function DisplayCharacterOptions()
   love.graphics.draw(images.playerBoyDown, playingAreaMaxX * (2/3), 200)
 
   if selectedCharacter == 1 then
-    love.graphics.circle("line", playingAreaMaxX * (1/3) + 3, 154, 10)
+    love.graphics.circle("line", playingAreaMaxX * (1/3) + 6, 156, 15)
   elseif selectedCharacter == 2 then
-    love.graphics.circle("line", playingAreaMaxX * (2/3) + 3, 154, 10)
+    love.graphics.circle("line", playingAreaMaxX * (2/3) + 6, 156, 15)
   end
 
 end
 
 function DisplayNameArea()
+
+  love.graphics.setFont(fonts.larger)
+
+  love.graphics.print("Enter your name to continue", playingAreaMaxX * (1/3) - 30, 310)
 
   love.graphics.setFont(fonts.veryLarge)
 
@@ -64,10 +70,14 @@ function DisplayNameArea()
 
   for i=1, 8, 1 do
     if nameLength > i - 1 then
-      love.graphics.print(string.sub(playerName,i,i), playingAreaMaxX * ((i+1)/10), 330)
+      love.graphics.print(string.sub(playerName,i,i), playingAreaMaxX * ((i+1)/10), 360)
     end
-    love.graphics.print("_", playingAreaMaxX * ((i+1)/10), 350)
+    love.graphics.print("_", playingAreaMaxX * ((i+1)/10), 380)
   end
+
+  love.graphics.setFont(fonts.larger)
+
+  love.graphics.print("Press return to start the game", playingAreaMaxX * (1/3) - 30, 480)
 
 end
 
