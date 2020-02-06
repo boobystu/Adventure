@@ -135,11 +135,11 @@ function CheckPlayerAnswer()
 
   player.lastQuestionCorrect = false
 
-  if lastDoorWalkedThrough == "" then
+  if player.lastDoorWalkedThrough == "" then
     return
   end
 
-  if lastDoorWalkedThrough == question.correctAnswer then
+  if player.lastDoorWalkedThrough == question.answerCorrectOption then
     player.lastQuestionCorrect = true
   end
 
@@ -184,7 +184,7 @@ function UpdatePlayer()
   end
 
   CheckForContactWithDoors()
-
+  
   ContactWithScrollOrTreasure()
 
   if ContactWithWall() == true then
