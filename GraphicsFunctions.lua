@@ -151,13 +151,10 @@ end
 
 function DisplayRoomWalls()
 
-  --love.graphics.setColor(0.35, 0.07,0.05, alphaMax)
-
   for i = 1, #roomWalls, 1 do
 
     local roomWall = roomWalls[i]
 
-    --love.graphics.rectangle("fill", roomWall.xPosition, roomWall.yPosition, roomWall.width, roomWall.height)
     love.graphics.draw(wallImage, roomWall.xPosition, roomWall.yPosition)
 
   end
@@ -166,10 +163,6 @@ function DisplayRoomWalls()
 end
 
 function DisplayCorridorWalls()
-
-  --love.graphics.setColor(0.35, 0.07,0.05, alphaMax)
-
-  --love.graphics.setColor(1, 1, 1, alphaMax)
 
   for i = 1, #corridorWalls, 1 do
 

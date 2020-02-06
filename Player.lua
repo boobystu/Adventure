@@ -35,24 +35,9 @@ function CheckForGameStart(key)
 
   if gameState == "InGame" then
     PlayGameMusic()
+    SetupPlayerSprite()
   end
 end
-
--- function CheckForGameStart()
---   if joystick then
---     if key == "start" then
---       gameState = "OptionsScreen"
---     end
---   end
---
---   if key == "return" then
---     gameState = "OptionsScreen"
---   end
---
---   if gameState == "OptionsScreen" then
---     playerName = ""
---   end
--- end
 
 function CheckForOptionsScreen(key)
 
@@ -114,6 +99,12 @@ function SetupPlayer()
   player.location = "room"
   player.lastQuestionCorrect = false
   player.lastDoorWalkedThrough = ""
+
+  SetupPlayerSprite()
+
+end
+
+function SetupPlayerSprite()
   if selectedCharacter == 1 then
     player.imageDown = images.playerGirlDown
     player.imageUp = images.playerGirlUp
@@ -126,7 +117,6 @@ function SetupPlayer()
     player.imageRight = images.playerBoyRight
   end
   player.image = player.imageDown
-
 end
 
 function CheckPlayerAnswer()
