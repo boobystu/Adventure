@@ -5,11 +5,11 @@ redColourDirection = "up"
 greenColourDirection = "up"
 blueColourDirection = "up"
 
-titleX = 170
+titleX = 480
 titleY = 60
-instructionX = 345
+instructionX = 655
 instructionY = 170
-highScoreX = 150
+highScoreX = 460
 highScoreY = 250
 scoreX = 10
 scoreY = 10
@@ -31,29 +31,35 @@ function DisplayEndScreen()
 
   love.graphics.setFont(fonts.zeldaTitle)
 
-  love.graphics.print("Game Over", playingAreaMaxX * (1/3), 150)
+  love.graphics.print("Game Over", playingAreaMaxX * (1/3) + 50, 80)
 
   love .graphics.setFont(fonts.zeldaInstructions)
 
-  love.graphics.print("Press start to play again", playingAreaMaxX * (1/3), 250)
+  love.graphics.print("Read all the scrolls of knowledge to exit", playingAreaMaxX * (1/3), 150)
+
+  DisplayEndWalls()
+
+  DisplayPlayer()
+
   DisplayScore()
+
 end
 
 function DisplayCharacterOptions()
 
   love.graphics.setFont(fonts.larger)
 
-  love.graphics.print("Select a character by pressing 1 or 2", playingAreaMaxX * (1/3) - 90, 100)
+  love.graphics.print("Select a character by pressing 1 or 2", windowMaxX * (1/3), 100)
 
-  love.graphics.print("1", playingAreaMaxX * (1/3), 150)
-  love.graphics.print("2", playingAreaMaxX * (2/3), 150)
-  love.graphics.draw(images.playerGirlDown, playingAreaMaxX * (1/3), 200)
-  love.graphics.draw(images.playerBoyDown, playingAreaMaxX * (2/3), 200)
+  love.graphics.print("1", windowMaxX * (1/3) + 50, 150)
+  love.graphics.print("2", windowMaxX * (2/3) - 50, 150)
+  love.graphics.draw(images.playerGirlDown, windowMaxX * (1/3) + 50, 200)
+  love.graphics.draw(images.playerBoyDown, windowMaxX * (2/3) - 50, 200)
 
   if selectedCharacter == 1 then
-    love.graphics.circle("line", playingAreaMaxX * (1/3) + 6, 156, 15)
+    love.graphics.circle("line", windowMaxX * (1/3) + 56, 156, 15)
   elseif selectedCharacter == 2 then
-    love.graphics.circle("line", playingAreaMaxX * (2/3) + 6, 156, 15)
+    love.graphics.circle("line", windowMaxX * (2/3) - 44, 156, 15)
   end
 
 end
@@ -62,7 +68,7 @@ function DisplayNameArea()
 
   love.graphics.setFont(fonts.larger)
 
-  love.graphics.print("Enter your name to continue", playingAreaMaxX * (1/3) - 30, 310)
+  love.graphics.print("Enter your name to continue", windowMaxX * (1/3) + 80, 310)
 
   love.graphics.setFont(fonts.veryLarge)
 
@@ -70,14 +76,14 @@ function DisplayNameArea()
 
   for i=1, 8, 1 do
     if nameLength > i - 1 then
-      love.graphics.print(string.sub(playerName,i,i), playingAreaMaxX * ((i+1)/10), 360)
+      love.graphics.print(string.sub(playerName,i,i), windowMaxX * ((i+1)/10) - 50, 360)
     end
-    love.graphics.print("_", playingAreaMaxX * ((i+1)/10), 380)
+    love.graphics.print("_", windowMaxX * ((i+1)/10), 380)
   end
 
   love.graphics.setFont(fonts.larger)
 
-  love.graphics.print("Press return to start the game", playingAreaMaxX * (1/3) - 30, 480)
+  love.graphics.print("Press return to start the game", windowMaxX * (1/3) + 50, 480)
 
 end
 
@@ -197,6 +203,18 @@ function DisplayCorridorWalls()
     local corridorWall = corridorWalls[i]
 
     love.graphics.draw(wallImage, corridorWall.xPosition, corridorWall.yPosition)
+
+  end
+
+end
+
+function DisplayEndWalls()
+
+  for i = 1, #endWalls, 1 do
+
+    local endWall = endWalls[i]
+
+    love.graphics.draw(wallImage, endWall.xPosition, endWall.yPosition)
 
   end
 

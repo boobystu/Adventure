@@ -9,16 +9,17 @@ doorEntranceXCoord = 393
 wallImage = love.graphics.newImage("assets/images/wallOne.png")
 
 function SetWallImage()
-
   wallImage = wallImages[math.random(1, 5)]
-
 end
 
 function BuildRoomWalls()
-
   BuildHorizontalRoomWalls()
   BuildVerticalRoomWalls()
+end
 
+function BuildEndWalls()
+  BuildHorizontalEndWalls()
+  BuildVerticalEndWalls()
 end
 
 function BuildCorridorWalls()
@@ -72,6 +73,26 @@ function BuildHorizontalRoomWalls()
 
 end
 
+function BuildHorizontalEndWalls()
+
+  for i = 1, playingAreaMaxX, rectangleWidth do
+
+    local rectangle = {}
+    InitialiseRectangle(rectangle, i, 0)
+
+    table.insert(endWalls, rectangle)
+
+    local rectangle = {}
+    InitialiseRectangle(rectangle, i, (love.graphics.getHeight() - rectangleHeight))
+
+    if (i ~= doorEntranceXCoord) then
+      table.insert(endWalls, rectangle)
+    end
+
+  end
+
+end
+
 function BuildVerticalRoomWalls()
 
   for i = 1, love.graphics.getHeight(), rectangleHeight do
@@ -85,6 +106,24 @@ function BuildVerticalRoomWalls()
     InitialiseRectangle(rectangle, playingAreaMaxX, i)
 
     table.insert(roomWalls, rectangle)
+
+  end
+
+end
+
+function BuildVerticalEndWalls()
+
+  for i = 1, love.graphics.getHeight(), rectangleHeight do
+
+    local rectangle = {}
+    InitialiseRectangle(rectangle, 0, i)
+
+    table.insert(endWalls, rectangle)
+
+    local rectangle = {}
+    InitialiseRectangle(rectangle, playingAreaMaxX, i)
+
+    table.insert(endWalls, rectangle)
 
   end
 
