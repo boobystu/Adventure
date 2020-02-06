@@ -137,6 +137,20 @@ function DisplayQuestion()
     "left")
 end
 
+function DisplayScrollInfo(scroll)
+  love.graphics.setFont(fonts.zeldaInstructions)
+  local yOrigin = 192
+  local xOrigin = questionAreaMinX + scoreX
+  local textWrapLimit = windowMaxX - xOrigin - 24 -- the 24 is just for some padding
+  love.graphics.printf(
+    scroll.questionText.."\n\n"..
+    scroll.url,
+    xOrigin,
+    yOrigin,
+    textWrapLimit,
+    "left")
+end
+
 function DisplayStartScreen()
 
   DisplayTitle()
