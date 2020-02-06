@@ -38,6 +38,22 @@ function CheckForGameStart(key)
   end
 end
 
+-- function CheckForGameStart()
+--   if joystick then
+--     if key == "start" then
+--       gameState = "OptionsScreen"
+--     end
+--   end
+--
+--   if key == "return" then
+--     gameState = "OptionsScreen"
+--   end
+--
+--   if gameState == "OptionsScreen" then
+--     playerName = ""
+--   end
+-- end
+
 function CheckForOptionsScreen(key)
 
   if joystick then
@@ -56,11 +72,26 @@ function CheckForOptionsScreen(key)
 
 end
 
+function CheckForTitleScreen(key)
+
+  if joystick then
+    if key == "start" then
+      gameState = "OptionsScreen"
+    end
+  end
+
+  if key == "return" then
+    gameState = "StartScreen"
+  end
+end
+
 function love.keyreleased(key)
   if gameState == "StartScreen" then
     CheckForOptionsScreen(key)
   elseif gameState == "OptionsScreen" then
     CheckForGameStart(key)
+  elseif gameState == "EndScreen" then
+    CheckForTitleScreen(key)
   end
 
 end
@@ -117,17 +148,7 @@ function UpdatePlayer()
   originalX = player.x
   originalY = player.y
 
-  --local playerDirection = ""
-
-  -- if joystick then
-  --   playerDirection = GetJoypadInput()
-  -- end
-  --
-  -- if playerDirection == "" then
-  --   playerDirection = GetKeyboardInput()
-  -- end
   GetMovementInput()
-  
 
   if playerDirection == "up" then
     player.image = player.imageUp
@@ -219,8 +240,11 @@ function PlayerChangingScreen()
     if answerCorrectOption == player.lastDoorWalkedThrough then
       player.lastQuestionCorrect = true
     end
-  else
+  elseif tempGameScreenCounter < 2 then
     player.location = "room"
+    tempGameScreenCounter = tempGameScreenCounter + 1
+  else
+    gameState = "EndScreen"
   end
 
 end

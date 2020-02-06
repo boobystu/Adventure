@@ -27,6 +27,18 @@ function DisplayOptionsScreen()
   DisplayNameArea()
 end
 
+function DisplayEndScreen()
+
+  love.graphics.setFont(fonts.zeldaTitle)
+
+  love.graphics.print("Game Over", playingAreaMaxX * (1/3), 150)
+
+  love .graphics.setFont(fonts.zeldaInstructions)
+
+  love.graphics.print("Press start to play again", playingAreaMaxX * (1/3), 250)
+
+end
+
 function DisplayCharacterOptions()
 
   love.graphics.setFont(fonts.large)
@@ -50,13 +62,11 @@ function DisplayNameArea()
 
   local nameLength = #playerName
 
-  love.graphics.print(playerName, playingAreaMaxX * (3/8), 300)
-
   for i=1, 8, 1 do
     if nameLength > i - 1 then
-      love.graphics.print(string.sub(playerName,i,i), playingAreaMaxX * ((i+1)/10), 380)
+      love.graphics.print(string.sub(playerName,i,i), playingAreaMaxX * ((i+1)/10), 330)
     end
-    love.graphics.print("_", playingAreaMaxX * ((i+1)/10), 400)
+    love.graphics.print("_", playingAreaMaxX * ((i+1)/10), 350)
   end
 
 end
