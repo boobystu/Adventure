@@ -34,13 +34,9 @@ wallImages = {}
 allQuestions = {}
 currentGameplayQuestions = {}
 numberOfQuestionsPerGame = 5
-questionText = ""
-answerTextA = ""
-answerTextB = ""
-answerTextC = ""
-answerCorrectText = ""
-answerCorrectOption = ""
 playerName = ""
+
+scrolls = {}
 
 gameState = ""
 

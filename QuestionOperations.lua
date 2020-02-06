@@ -2,18 +2,18 @@ function PopulateQuestionAndAnswers()
 
   local allTextItems = currentGameplayQuestions[#currentGameplayQuestions]:split(",")
 
-  questionText = allTextItems[1]
-  answerTextA = allTextItems[2]
-  answerTextB = allTextItems[3]
-  answerTextC = allTextItems[4]
-  answerCorrectText = allTextItems[5]
+  question.questionText = allTextItems[1]
+  question.answerTextA = allTextItems[2]
+  question.answerTextB = allTextItems[3]
+  question.answerTextC = allTextItems[4]
+  question.answerCorrectText = allTextItems[5]
 
-  if answerTextA == answerCorrectText then
-    answerCorrectOption = "A"
-  elseif answerTextB == answerCorrectText then
-    answerCorrectOption = "B"
-  elseif answerTextC == answerCorrectText then
-    answerCorrectOption = "C"
+  if question.answerTextA == question.answerCorrectText then
+    question.answerCorrectOption = "A"
+  elseif question.answerTextB == question.answerCorrectText then
+    question.answerCorrectOption = "B"
+  elseif question.answerTextC == question.answerCorrectText then
+    question.answerCorrectOption = "C"
   end
 
 end
@@ -46,4 +46,10 @@ function GetFirstNQuestions(questions, n)
   end
 
   return firstNQuestions
+end
+
+function RemoveLastQuestion()
+  if #currentGameplayQuestions > 0 then
+    table.remove(currentGameplayQuestions, #currentGameplayQuestions)
+  end
 end

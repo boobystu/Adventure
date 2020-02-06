@@ -237,7 +237,7 @@ function PlayerChangingScreen()
   if player.location == "room" then
     player.location = "corridor"
     player.pickedUpQuestion = false
-    if answerCorrectOption == player.lastDoorWalkedThrough then
+    if question.answerCorrectOption == player.lastDoorWalkedThrough then
       player.lastQuestionCorrect = true
     end
   elseif tempGameScreenCounter < 2 then
