@@ -34,13 +34,9 @@ wallImages = {}
 allQuestions = {}
 currentGameplayQuestions = {}
 numberOfQuestionsPerGame = 5
-questionText = ""
-answerTextA = ""
-answerTextB = ""
-answerTextC = ""
-answerCorrectText = ""
-answerCorrectOption = ""
 playerName = ""
+
+scrolls = {}
 
 gameState = ""
 
@@ -95,6 +91,12 @@ function love.draw()
     DisplayStartScreen()
   elseif gameState == "OptionsScreen" then
     DisplayOptionsScreen()
+    love.graphics.setFont(fonts.large, 10)
+    y = 200
+    for i = 1, #currentGameplayQuestions, 1 do
+      love.graphics.print(tostring(currentGameplayQuestions[i]), 700, y)
+      y = y+100
+    end
   elseif gameState == "InGame" then
     DisplayGame()
   end
