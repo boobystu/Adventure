@@ -255,4 +255,5 @@ function ResetForNewGame()
   tempGameScreenCounter = 0
   player.location = "room"
   PlayMenuMusic()
+  PopulateEndGameScrollLocations()
 end

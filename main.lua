@@ -17,6 +17,7 @@ player = {}
 room = {}
 roomWalls = {}
 corridorWalls = {}
+endWalls = {}
 doors = {}
 question = {}
 titleColour = {}
@@ -37,6 +38,7 @@ numberOfQuestionsPerGame = 5
 playerName = ""
 
 scrolls = {}
+endGameScrollLocations = {}
 
 gameState = ""
 
@@ -63,9 +65,13 @@ function love.load(arg)
 
   BuildCorridorWalls()
 
+  BuildEndWalls()
+
   SetupPlayer()
 
   ReadQuestionFile()
+
+  PopulateEndGameScrollLocations()
 
   allQuestions = RandomiseQuestionOrder(allQuestions)
 
@@ -77,7 +83,7 @@ end
 
 function love.update(dt)
 
-  if gameState == "InGame" then
+  if gameState == "InGame" or gameState == "EndScreen" then
     UpdatePlayer()
   end
 
