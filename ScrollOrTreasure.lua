@@ -1,3 +1,6 @@
+require "QuestionOperations"
+require "Scrolls"
+
 function DisplayScrollOrTreasure()
 
   if player.pickedUpQuestion == true then
@@ -30,8 +33,9 @@ function ContactWithScrollOrTreasure()
       if player.lastQuestionCorrect == true then
         AddToScore()
       else
-        -- TODO AddToScrolls function
+        AddToScrolls()
       end
+      RemoveLastQuestion()
     end
     player.pickedUpQuestion = true
     player.lastQuestionCorrect = false
