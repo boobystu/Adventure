@@ -26,6 +26,12 @@ function ContactWithScrollOrTreasure()
   end
 
   if CollisionDetected(player.x, player.y, player.w, player.h, pickup.x, pickup.y, pickup.w, pickup.h) then
+    if player.pickedUpQuestion == false then
+      -- TODO
+      --if treasure then AddToScore()
+      --elseif scroll then AddToScrolls()
+      AddToScore()
+    end
     player.pickedUpQuestion = true
     player.lastQuestionCorrect = false
     PopulateQuestionAndAnswers()
