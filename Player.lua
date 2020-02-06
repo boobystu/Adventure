@@ -76,8 +76,6 @@ function love.keyreleased(key)
   elseif gameState == "OptionsScreen" then
     CheckForGameStart(key)
   elseif gameState == "EndScreen" then
-    AddHighScore(playerName, GetScore())
-    LoadHighScores()
     CheckForTitleScreen(key)
   end
 
@@ -233,11 +231,18 @@ function PlayerChangingScreen()
     player.pickedUpQuestion = false
     if question.answerCorrectOption == player.lastDoorWalkedThrough then
       player.lastQuestionCorrect = true
+      pickupItem = "coin"
+    else
+      pickupItem = "scroll"
     end
   elseif tempGameScreenCounter < 2 then
     player.location = "room"
     tempGameScreenCounter = tempGameScreenCounter + 1
   else
+    if gameState ~= "EndScreen" then
+      AddHighScore(playerName, GetScore())
+      LoadHighScores()
+    end
     gameState = "EndScreen"
     ResetForNewGame()
   end

@@ -41,6 +41,8 @@ function DisplayEndScreen()
 
   DisplayPlayer()
 
+  DisplayScore()
+
 end
 
 function DisplayCharacterOptions()

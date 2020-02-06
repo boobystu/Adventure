@@ -13,7 +13,7 @@ function DisplayScrollOrTreasure()
   pickup.h = 50
   pickup.image = images.coin
 
-  if item == "scroll" then
+  if pickupItem == "scroll" then
     pickup.image = images.scrollClosed
   end
 
