@@ -7,6 +7,7 @@ require "Walls"
 require "QuestionOperations"
 require "Questions"
 require "ScrollOrTreasure"
+require "music"
 
 highScores = {}
 fonts = {}
@@ -24,6 +25,9 @@ alphaMax = 1
 doorOptionA = {}
 doorOptionB = {}
 doorOptionC = {}
+pickup = {}
+images = {}
+wallImages = {}
 
 allQuestions = {}
 currentGameplayQuestions = {}
@@ -34,10 +38,20 @@ answerTextB = ""
 answerTextC = ""
 answerCorrectText = ""
 answerCorrectOption = ""
+playerName = ""
 
 gameState = ""
 
 function love.load(arg)
+
+  local joysticks = love.joystick.getJoysticks()
+  joystick = joysticks[1]
+
+  PlayMenuMusic()
+
+  SetupWindow()
+
+  LoadImages()
 
   SetupDoorOptions()
 
@@ -75,6 +89,8 @@ function love.draw()
 
   if gameState == "StartScreen" then
     DisplayStartScreen()
+  elseif gameState == "OptionsScreen" then
+    DisplayOptionsScreen()
   elseif gameState == "InGame" then
     DisplayGame()
   end

@@ -2,15 +2,18 @@ require "collision"
 
 rectangleHeight = 56
 rectangleWidth = 56
+doorAXCoord = 281
+doorBXCoord = 393
+doorCXCoord = 505
+doorEntranceXCoord = 393
 
-optionADoorLeft = 0.2
-optionADoorRight = 0.25
-optionBDoorLeft = .45
-optionBDoorRight = .55
-optionCDoorLeft = 0.75
-optionCDoorRight = 0.8
-entranceDoorLeft = 0.45
-entranceDoorRight = 0.55
+wallImage = love.graphics.newImage("assets/images/wallOne.png")
+
+function SetWallImage()
+
+  wallImage = wallImages[math.random(1, 5)]
+
+end
 
 function BuildRoomWalls()
 
@@ -24,18 +27,12 @@ function BuildCorridorWalls()
   for i = 1, love.graphics.getHeight(), rectangleHeight do
 
     local rectangle = {}
-    rectangle.width = 56
-    rectangle.height = 56
-    rectangle.xPosition = love.graphics.getWidth() * 2/5
-    rectangle.yPosition = i
+    InitialiseRectangle(rectangle, playingAreaMaxX * 2/5, i)
 
     table.insert(corridorWalls, rectangle)
 
     local rectangle = {}
-    rectangle.width = 56
-    rectangle.height = 56
-    rectangle.xPosition = love.graphics.getWidth() * 3/5
-    rectangle.yPosition = i
+    InitialiseRectangle(rectangle, playingAreaMaxX * 3/5, i)
 
     table.insert(corridorWalls, rectangle)
 
@@ -45,27 +42,20 @@ end
 
 function BuildHorizontalRoomWalls()
 
-  for i = 1, love.graphics.getWidth(), rectangleWidth do
+  for i = 1, playingAreaMaxX, rectangleWidth do
 
     local rectangle = {}
-    rectangle.width = 56
-    rectangle.height = 56
-    rectangle.xPosition = i
-    rectangle.yPosition = 0
+    InitialiseRectangle(rectangle, i, 0)
 
-    if (i < love.graphics.getWidth() * optionBDoorLeft or
-        i > love.graphics.getWidth() * optionBDoorRight) and
-       (i < love.graphics.getWidth() * optionADoorLeft or
-        i > love.graphics.getWidth() * optionADoorRight) and
-       (i < love.graphics.getWidth() * optionCDoorLeft or
-        i > love.graphics.getWidth() * optionCDoorRight) then
+    if (i ~= doorAXCoord and i ~= doorBXCoord and i ~= doorCXCoord) then
 
       table.insert(roomWalls, rectangle)
+
     else
 
-      if doorOptionA.xPosition == -1 then
+      if i == doorAXCoord then
         doorOptionA = rectangle
-      elseif doorOptionB.xPosition == -1 then
+      elseif i == doorBXCoord then
         doorOptionB = rectangle
       else
         doorOptionC = rectangle
@@ -73,13 +63,9 @@ function BuildHorizontalRoomWalls()
     end
 
     local rectangle = {}
-    rectangle.width = 56
-    rectangle.height = 56
-    rectangle.xPosition = i
-    rectangle.yPosition = (love.graphics.getHeight() - rectangleHeight)
+    InitialiseRectangle(rectangle, i, (love.graphics.getHeight() - rectangleHeight))
 
-    if i < love.graphics.getWidth() * entranceDoorLeft or
-       i > love.graphics.getWidth() * entranceDoorRight then
+    if (i ~= doorEntranceXCoord) then
       table.insert(roomWalls, rectangle)
     end
 
@@ -92,23 +78,24 @@ function BuildVerticalRoomWalls()
   for i = 1, love.graphics.getHeight(), rectangleHeight do
 
     local rectangle = {}
-    rectangle.width = 56
-    rectangle.height = 56
-    rectangle.xPosition = 0
-    rectangle.yPosition = i
+    InitialiseRectangle(rectangle, 0, i)
 
     table.insert(roomWalls, rectangle)
 
     local rectangle = {}
-    rectangle.width = 56
-    rectangle.height = 56
-    rectangle.xPosition = (love.graphics.getWidth() - rectangleWidth)
-    rectangle.yPosition = i
+    InitialiseRectangle(rectangle, playingAreaMaxX, i)
 
     table.insert(roomWalls, rectangle)
 
   end
 
+end
+
+function InitialiseRectangle(rect, x, y)
+  rect.width = rectangleWidth
+  rect.height = rectangleHeight
+  rect.xPosition = x
+  rect.yPosition = y
 end
 
 function ContactWithWall()
@@ -137,34 +124,37 @@ end
 
 function CheckForContactWithDoors()
 
-  if CheckForContactWithDoor("A") == true then
+  local doorOption = "A"
+  if CheckForContactWithDoor(doorOption) == true then
     return
   end
 
-  if CheckForContactWithDoor("B") == true then
+  doorOption = "B"
+  if CheckForContactWithDoor(doorOption) == true then
     return
   end
 
-  if CheckForContactWithDoor("C") == true then
+  doorOption = "C"
+  if CheckForContactWithDoor(doorOption) == true then
     return
   end
 
 end
 
-function CheckForContactWithDoor(option)
+function CheckForContactWithDoor(doorOption)
 
   local door = {}
 
-  if option == "A" then
+  if doorOption == "A" then
     door = doorOptionA
-  elseif option == "B" then
-      door = doorOptionB
+  elseif doorOption == "B" then
+    door = doorOptionB
   else
-    door = doorOptionA
+    door = doorOptionC
   end
-  
+
   if CollisionDetected(player.x, player.y, player.w, player.h, door.xPosition, door.yPosition, door.width, door.height) then
-    player.lastDoorWalkedThrough = option
+    player.lastDoorWalkedThrough = doorOption
     return true
   end
 

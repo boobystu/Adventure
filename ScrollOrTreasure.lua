@@ -1,17 +1,33 @@
 function DisplayScrollOrTreasure(item)
 
-  pickup = {}
-  pickup.x = love.graphics.getWidth() * 0.5
-  pickup.y = love.graphics.getHeight() * 0.5
-  pickup.w = 10
-  pickup.h = 10
-
-  if item == "treasure" then
-    love.graphics.setColor(1, 1, 0, alphaMax)
-  else
-    love.graphics.setColor(0, 1, 0, alphaMax)
+  if player.pickedUpQuestion == true then
+    return
   end
 
-  love.graphics.rectangle("fill", pickup.x, pickup.y, pickup.w, pickup.h)
+  pickup.x = playingAreaMaxX * 0.5
+  pickup.y = love.graphics.getHeight() * 0.5
+  pickup.w = 38
+  pickup.h = 50
+  pickup.image = images.coin
 
+  if item == "scroll" then
+    pickup.image = images.scrollClosed
+  end
+
+  love.graphics.draw(pickup.image, pickup.x, pickup.y)
+
+end
+
+
+function ContactWithScrollOrTreasure()
+
+  if pickup.w ~= 38 then
+    return
+  end
+
+  if CollisionDetected(player.x, player.y, player.w, player.h, pickup.x, pickup.y, pickup.w, pickup.h) then
+    player.pickedUpQuestion = true
+    player.lastQuestionCorrect = false
+    PopulateQuestionAndAnswers()
+  end
 end
