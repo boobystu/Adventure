@@ -61,7 +61,6 @@ function DisplayCharacterOptions()
   elseif selectedCharacter == 2 then
     love.graphics.circle("line", windowMaxX * (2/3) - 44, 156, 15)
   end
-
 end
 
 function DisplayNameArea()
@@ -84,7 +83,6 @@ function DisplayNameArea()
   love.graphics.setFont(fonts.larger)
 
   love.graphics.print("Press return to start the game", windowMaxX * (1/3) + 50, 480)
-
 end
 
 function DisplayGame()
@@ -100,7 +98,6 @@ function DisplayGame()
   end
   DisplayScore()
   DisplayPlayer()
-
 end
 
 function LoadImages()
@@ -122,9 +119,6 @@ function LoadImages()
   table.insert(wallImages, love.graphics.newImage("assets/images/wallThree.png"))
   table.insert(wallImages, love.graphics.newImage("assets/images/wallFour.png"))
   table.insert(wallImages, love.graphics.newImage("assets/images/wallFive.png"))
-
-
-
 end
 
 function DisplayQuestion()
@@ -224,7 +218,6 @@ function DisplayCorridorWalls()
     love.graphics.draw(wallImage, corridorWall.xPosition, corridorWall.yPosition)
 
   end
-
 end
 
 function DisplayEndWalls()
@@ -236,7 +229,6 @@ function DisplayEndWalls()
     love.graphics.draw(wallImage, endWall.xPosition, endWall.yPosition)
 
   end
-
 end
 
 function DisplayDoors()
@@ -253,7 +245,6 @@ function DisplayRoomBackground()
   love.graphics.print("C", doorCXCoord, 60)
 
   love.graphics.setColor(1, 1, 1, alphaMax)
-
 end
 
 function DisplayCorridorBackground()
@@ -263,7 +254,6 @@ end
 function DisplayPlayer()
 
   love.graphics.draw(player.image, player.x, player.y)
-
 end
 
 function AlterTitleColours()
@@ -314,5 +304,4 @@ function SetupWindow()
   questionAreaMaxX = windowMaxX
 
   love.window.setMode(windowMaxX, windowMaxY)
-
 end
