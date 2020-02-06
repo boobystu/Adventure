@@ -231,6 +231,9 @@ function PlayerChangingScreen()
     player.pickedUpQuestion = false
     if question.answerCorrectOption == player.lastDoorWalkedThrough then
       player.lastQuestionCorrect = true
+      pickupItem = "coin"
+    else
+      pickupItem = "scroll"
     end
   elseif tempGameScreenCounter < 2 then
     player.location = "room"

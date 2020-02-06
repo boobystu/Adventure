@@ -10,7 +10,7 @@ require "music"
 require "Score"
 require "Thief"
 
-
+pickupItem = ""
 highScores = {}
 fonts = {}
 player = {}
