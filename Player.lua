@@ -19,7 +19,7 @@ function CheckForGameStart(key)
     end
   end
 
-  if selectedCharacter == 0 and #playerName == 0 then
+  if selectedCharacter == 0 or #playerName == 0 then
     return
   end
 
@@ -176,7 +176,7 @@ function UpdatePlayer()
   end
 
   CheckForContactWithDoors()
-  
+
   ContactWithScrollOrTreasure()
 
   if ContactWithWall() == true then
