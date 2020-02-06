@@ -6,7 +6,6 @@ doorAXCoord = 281
 doorBXCoord = 393
 doorCXCoord = 505
 doorEntranceXCoord = 393
-
 wallImage = love.graphics.newImage("assets/images/wallOne.png")
 
 function SetWallImage()

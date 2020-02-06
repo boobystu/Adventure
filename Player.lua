@@ -155,7 +155,9 @@ function UpdatePlayer()
     end
   end
 
-  CheckForContactWithDoor()
+  CheckForContactWithDoors()
+
+  ContactWithScrollOrTreasure()
 
   ContactWithScrollOrTreasure()
 

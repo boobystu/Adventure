@@ -157,8 +157,6 @@ function DisplayCorridorWalls()
 
   end
 
-  --love.graphics.setColor(1, 1, 1, alphaMax)
-
 end
 
 function DisplayDoors()
@@ -217,7 +215,6 @@ function AlterTitleColours()
     blueColourDirection = "up"
   end
 end
-
 
 function SetupWindow()
 

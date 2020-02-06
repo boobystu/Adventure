@@ -5,7 +5,6 @@ require "GraphicsFunctions"
 require "Player"
 require "Walls"
 require "QuestionOperations"
-require "Questions"
 require "ScrollOrTreasure"
 require "music"
 

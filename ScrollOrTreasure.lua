@@ -1,4 +1,4 @@
-function DisplayScrollOrTreasure(item)
+function DisplayScrollOrTreasure()
 
   if player.pickedUpQuestion == true then
     return
