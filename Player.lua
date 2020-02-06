@@ -1,6 +1,7 @@
 require "ScrollOrTreasure"
 
 movementSpeed = 7
+playerDirection = ""
 
 function EnvIsAlphaNum(sIn)
   return (string.match(sIn,"[^%w]") == nil)
@@ -116,13 +117,17 @@ function UpdatePlayer()
   originalX = player.x
   originalY = player.y
 
-  local playerDirection = ""
+  --local playerDirection = ""
 
-  if not joystick then
-    playerDirection = GetKeyboardInput()
-  else
-    playerDirection = GetJoypadInput()
-  end
+  -- if joystick then
+  --   playerDirection = GetJoypadInput()
+  -- end
+  --
+  -- if playerDirection == "" then
+  --   playerDirection = GetKeyboardInput()
+  -- end
+  GetMovementInput()
+  
 
   if playerDirection == "up" then
     player.image = player.imageUp
@@ -159,36 +164,43 @@ function UpdatePlayer()
 
   ContactWithScrollOrTreasure()
 
-  ContactWithScrollOrTreasure()
-
   if ContactWithWall() == true then
     player.x = originalX
     player.y = originalY
   end
 end
 
-function GetJoypadInput()
-  if joystick:isGamepadDown("dpleft") then
-    return "left"
-  elseif joystick:isGamepadDown("dpright") then
-    return "right"
-  elseif joystick:isGamepadDown("dpup") then
-    return "up"
-  elseif joystick:isGamepadDown("dpdown") then
-    return "down"
-  end
-end
+function GetMovementInput()
 
-function GetKeyboardInput()
-  if love.keyboard.isDown("up") then
-    return "up"
-  elseif love.keyboard.isDown("down") then
-    return "down"
-  elseif love.keyboard.isDown("left") then
-    return "left"
-  elseif love.keyboard.isDown("right") then
-    return "right"
+  playerDirection = ""
+
+  if joystick then
+
+    if joystick:isGamepadDown("dpleft") then
+      playerDirection = "left"
+    elseif joystick:isGamepadDown("dpright") then
+      playerDirection = "right"
+    elseif joystick:isGamepadDown("dpup") then
+      playerDirection = "up"
+    elseif joystick:isGamepadDown("dpdown") then
+      playerDirection = "down"
+    end
   end
+
+  if playerDirection ~= "" then
+    return
+  end
+
+  if love.keyboard.isDown("up") then
+    playerDirection = "up"
+  elseif love.keyboard.isDown("down") then
+    playerDirection = "down"
+  elseif love.keyboard.isDown("left") then
+    playerDirection = "left"
+  elseif love.keyboard.isDown("right") then
+    playerDirection = "right"
+  end
+
 end
 
 function PlayerChangingScreen()
