@@ -42,6 +42,7 @@ function DisplayEndScreen()
   DisplayPlayer()
 
   DisplayScore()
+  DisplayEndInstructions()
 end
 
 function DisplayCharacterOptions()
@@ -155,6 +156,25 @@ function DisplayScore (args)
     questionAreaMinX + scoreX + 250,
     scoreY
   )
+end
+
+function DisplayEndInstructions ()
+  love.graphics.setFont(fonts.zeldaInstructions)
+  local yOrigin = 64
+  local xOrigin = questionAreaMinX + scoreX
+  local textWrapLimit = windowMaxX - xOrigin - 24 -- the 24 is just for some padding
+  local resultText = ""
+  if #scrolls == 0 then
+    resultText = "You have succeeded in all your challenges and can now safely pass through the exit.\n\nWell done."
+  else
+    resultText = "However, you have collected Scrolls of Wisdom during your trial. Pick up each scroll the receive the enlightenment within."
+  end
+  love.graphics.printf(
+    "Congratulations adventurer ".. playerName .. "... You have completed your quest.\n\n"..resultText,
+    questionAreaMinX + scoreX,
+    yOrigin,
+    textWrapLimit,
+    "left")
 end
 
 function DisplayTitle()
