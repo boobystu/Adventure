@@ -1,5 +1,9 @@
 function PopulateQuestionAndAnswers()
 
+  if #currentGameplayQuestions == 0 then
+    return
+  end
+
   local allTextItems = currentGameplayQuestions[#currentGameplayQuestions]:split(",")
 
   question.questionText = allTextItems[1]
