@@ -7,6 +7,7 @@ function AddToScrolls()
   scroll.answerTextC = question.answerTextC
   scroll.answerCorrectText = question.answerCorrectText
   scroll.answerCorrectOption = question.answerCorrectOption
+  scroll.read = false
 
   local scrollLocationIndex = math.random(1, #endGameScrollLocations)
   local scrollLocation = table.remove(endGameScrollLocations, scrollLocationIndex)
