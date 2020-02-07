@@ -33,6 +33,7 @@ pickup = {}
 images = {}
 wallImages = {}
 url = ""
+roomFurnitureItems = {}
 
 allQuestions = {}
 currentGameplayQuestions = {}
@@ -91,6 +92,8 @@ function love.load(arg)
   currentGameplayQuestions = GetFirstNQuestions(allQuestions, numberOfQuestionsPerGame)
 
   gameState = "StartScreen"
+
+  AddFurnitureToRoom()
 
 end
 

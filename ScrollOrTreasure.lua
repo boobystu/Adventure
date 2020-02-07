@@ -52,9 +52,13 @@ function ContactWithScrollOrTreasure()
   end
 
   if CollisionDetected(player.x, player.y, player.w, player.h, pickup.x, pickup.y, pickup.w, pickup.h) then
+
+    PlayPickupSound()
+
     if gameState == "EndScreen" then
       return
     end
+
 
     if player.pickedUpQuestion == false then
       if player.lastQuestionCorrect == true then

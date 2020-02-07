@@ -3,6 +3,8 @@ require "ScrollOrTreasure"
 movementSpeed = 7
 playerDirection = ""
 
+
+
 function EnvIsAlphaNum(sIn)
   return (string.match(sIn,"[^%w]") == nil)
 end
@@ -169,6 +171,11 @@ function UpdatePlayer()
     player.y = originalY
   end
 
+  if CollisionDetectedWithRoomFurniture() == true then
+    player.x = originalX
+    player.y = originalY
+  end
+
   if ContactWithKey() then
     gameState = "StartScreen"
   end
@@ -245,6 +252,7 @@ function PlayerChangingScreen()
   elseif tempGameScreenCounter < 2 then
     player.location = "room"
     tempGameScreenCounter = tempGameScreenCounter + 1
+    AddFurnitureToRoom()
   else
     if gameState ~= "EndScreen" then
       AddHighScore(playerName, GetScore())
@@ -253,6 +261,53 @@ function PlayerChangingScreen()
     gameState = "EndScreen"
     ResetForNewGame()
   end
+
+end
+
+function AddFurnitureItem(itemX, itemY, itemW, itemH)
+
+  furnitureItem = {}
+  furnitureItem.x = itemX
+  furnitureItem.y = itemY
+  furnitureItem.w = itemW
+  furnitureItem.h = itemH
+
+  return furnitureItem
+end
+
+function AddFurnitureToRoom()
+  roomFurnitureItems = {}
+  local item = AddFurnitureItem(182, 304, 63, 127)
+  table.insert(roomFurnitureItems, item) -- monumentone
+  local item = AddFurnitureItem(631, 292, 120, 189)
+  table.insert(roomFurnitureItems, item) -- monumenttwo
+  --stairs in four parts
+  local item = AddFurnitureItem(57, 215, 326, 54)
+  table.insert(roomFurnitureItems, item) -- stairs one
+  local item = AddFurnitureItem(323, 215, 60, 252)
+  table.insert(roomFurnitureItems, item) -- stairs two
+  local item = AddFurnitureItem(456, 215, 326, 54)
+  table.insert(roomFurnitureItems, item) -- stairs three
+  local item = AddFurnitureItem(456, 215, 60, 252)
+  table.insert(roomFurnitureItems, item) -- stairs four
+end
+
+function CollisionDetectedWithRoomFurniture()
+  if gameState ~= "InGame" then
+    return
+  end
+  
+  if #roomFurnitureItems < 1 then
+    return false
+  end
+
+  for i = 1, #roomFurnitureItems, 1 do
+    if CollisionDetected(player.x, player.y, player.w, player.h, roomFurnitureItems[i].x, roomFurnitureItems[i].y, roomFurnitureItems[i].w, roomFurnitureItems[i].h) then
+      return true
+    end
+  end
+
+  return false
 
 end
 
