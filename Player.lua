@@ -258,7 +258,7 @@ end
 
 function ResetForNewGame()
   player.x = playingAreaMaxX / 2
-  player.y = love.graphics.getHeight() / 2
+  player.y = love.graphics.getHeight() - 100
   tempGameScreenCounter = 0
   player.location = "room"
   PlayMenuMusic()
