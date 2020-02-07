@@ -51,9 +51,15 @@ end
 
 function DisplayEndScreenScrolls()
 
+  DisplayScore()
+  DisplayEndInstructions()
+
   if #scrolls == 0 then
     return
   end
+
+  --love.graphics.setFont(fonts.larger)
+  --love.graphics.print("#Scrolls: "..#scrolls, windowMaxX * (1/3), windowMaxY - 64)
 
   for i=1, #scrolls, 1 do
 
@@ -65,15 +71,8 @@ function DisplayEndScreenScrolls()
 
     if CollisionDetected(player.x, player.y, player.w, player.h, scrolls[i].endScreenXCoord, scrolls[i].endScreenYCoord, scrollWidth, scrollHeight) then
       DisplayScrollInfo(scrolls[i])
-    else
-      DisplayEndInstructions()
     end
-
   end
-
-  DisplayScore()
-
-
 end
 
 function DisplayCharacterOptions()
@@ -225,7 +224,7 @@ function DisplayEndInstructions()
   local textWrapLimit = windowMaxX - xOrigin - 24 -- the 24 is just for some padding
   local resultText = ""
   if #scrolls == 0 then
-    resultText = "You have succeeded in all your challenges and can now safely pass through the exit.\n\nWell done."
+    resultText = "You have succeeded in all your challenges and can now safely collect the exit key.\n\nWell done."
   else
     resultText = "However, you have collected Scrolls of Wisdom during your trial.\n\nExamine each scroll to receive the enlightenment within."
   end

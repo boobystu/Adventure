@@ -10,6 +10,7 @@ require "music"
 require "Score"
 require "Thief"
 
+debug = true
 pickupItem = ""
 highScores = {}
 fonts = {}

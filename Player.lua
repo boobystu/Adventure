@@ -159,7 +159,7 @@ function UpdatePlayer()
   end
 
   CheckForContactWithDoors()
-
+  
   ContactWithScrollOrTreasure()
 
   ContactWithEndScreenScrolls()
