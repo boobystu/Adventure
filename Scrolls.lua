@@ -30,3 +30,19 @@ function PopulateEndGameScrollLocations()
   table.insert(endGameScrollLocations, {["x"] = 500, ["y"] = 480})
 
 end
+
+function AllScrollsRead()
+
+  if #scrolls == 0 then
+    return true
+  end
+
+  for i = 1, #scrolls, 1 do
+      if scrolls[i].read == false then
+        return false
+      end
+  end
+
+  return true
+
+end

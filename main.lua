@@ -31,6 +31,7 @@ doorOptionC = {}
 pickup = {}
 images = {}
 wallImages = {}
+url = ""
 
 allQuestions = {}
 currentGameplayQuestions = {}
@@ -43,8 +44,19 @@ endGameScrollLocations = {}
 gameState = ""
 
 tempGameScreenCounter = 0
+scrollWidth = 38
+scrollHeight = 50
+
+linkAvailable = false
+
+keyX = 0
+keyY = 100
+keyW = 46
+keyH = 42
 
 function love.load(arg)
+
+  love.window.setTitle("The Trials of IRIS")
 
   local joysticks = love.joystick.getJoysticks()
   joystick = joysticks[1]
@@ -59,13 +71,13 @@ function love.load(arg)
 
   LoadFont()
 
-  LoadHighScores()
-
   BuildRoomWalls()
 
   BuildCorridorWalls()
 
   BuildEndWalls()
+
+  LoadHighScores()
 
   SetupPlayer()
 
@@ -103,6 +115,25 @@ function love.draw()
     DisplayGame()
   elseif gameState == "EndScreen" then
     DisplayEndScreen()
+  end
+
+end
+
+function love.mousepressed(x, y, b, isTouch)
+  if b ~= 1 then
+    return
+  end
+
+  if linkAvailable == false then
+    return
+  end
+
+  if url == "No URL available" then
+    return
+  end
+
+  if x >= questionAreaMinX then
+    love.system.openURL(url)
   end
 
 end
