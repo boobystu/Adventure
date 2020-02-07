@@ -193,7 +193,7 @@ function DisplayEndInstructions ()
   if #scrolls == 0 then
     resultText = "You have succeeded in all your challenges and can now safely pass through the exit.\n\nWell done."
   else
-    resultText = "However, you have collected Scrolls of Wisdom during your trial. Pick up each scroll the receive the enlightenment within."
+    resultText = "However, you have collected Scrolls of Wisdom during your trial.\n\nExamine each scroll the receive the enlightenment within."
   end
   love.graphics.printf(
     "Congratulations adventurer ".. playerName .. "... You have completed your quest.\n\n"..resultText,
