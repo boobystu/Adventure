@@ -225,6 +225,8 @@ function DisplayEndInstructions()
   local resultText = ""
   if #scrolls == 0 then
     resultText = "You have succeeded in all your challenges and can now safely collect the exit key.\n\nWell done."
+  elseif AllScrollsRead() == true then
+    resultText = "You have now read all of your scrolls to become fully enlightened.\n\nYou can now collect the exit key... Well done."
   else
     resultText = "However, you have collected Scrolls of Wisdom during your trial.\n\nExamine each scroll to receive the enlightenment within."
   end
