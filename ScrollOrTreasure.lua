@@ -31,14 +31,15 @@ function ContactWithEndScreenScrolls()
     return
   end
 
-  local scrollWidth = 38
-  local scrollHeight = 50
-
   for i = 1, #scrolls, 1 do
-    local scroll = scrolls[i]
-
-    if CollisionDetected(player.x, player.y, player.w, player.h, scroll.endScreenXCoord, scroll.endScreenYCoord, scrollWidth, scrollHeight) then
-      
+    if CollisionDetected(player.x, player.y, player.w, player.h, scrolls[i].endScreenXCoord, scrolls[i].endScreenYCoord, scrollWidth, scrollHeight) then
+      scrolls[i].read = true
+      linkAvailable = true
+      url = scrolls[i].url
+      return
+    else
+      linkAvailable = false
+      url = ""
     end
   end
 

@@ -33,9 +33,19 @@ function DisplayEndScreen()
 
   DisplayEndScreenScrolls()
 
+  if AllScrollsRead() then
+    DisplayKey()
+  end
+
   DisplayPlayer()
 
   DisplayScore()
+
+end
+
+function DisplayKey()
+
+  love.graphics.draw(images.key, keyX, keyY)
 
 end
 
@@ -46,14 +56,23 @@ function DisplayEndScreenScrolls()
   end
 
   for i=1, #scrolls, 1 do
-    local scroll = scrolls[i]
 
-    love.graphics.draw(images.scrollOpen, scroll.endScreenXCoord, scroll.endScreenXCoord)
+    if scrolls[i].read == true then
+      love.graphics.draw(images.scrollOpen, scrolls[i].endScreenXCoord, scrolls[i].endScreenXCoord)
+    else
+      love.graphics.draw(images.scrollClosed, scrolls[i].endScreenXCoord, scrolls[i].endScreenXCoord)
+    end
+
+    if CollisionDetected(player.x, player.y, player.w, player.h, scrolls[i].endScreenXCoord, scrolls[i].endScreenYCoord, scrollWidth, scrollHeight) then
+      DisplayScrollInfo(scrolls[i])
+    else
+      DisplayEndInstructions()
+    end
 
   end
 
   DisplayScore()
-  DisplayEndInstructions()
+
 
 end
 
@@ -89,7 +108,7 @@ function DisplayNameArea()
     if nameLength > i - 1 then
       love.graphics.print(string.sub(playerName,i,i), windowMaxX * ((i+1)/10) - 50, 360)
     end
-    love.graphics.print("_", windowMaxX * ((i+1)/10), 380)
+    love.graphics.print("_", windowMaxX * ((i+1)/10) - 50, 380)
   end
 
   love.graphics.setFont(fonts.larger)
@@ -100,6 +119,7 @@ end
 function DisplayGame()
 
   if player.location == "room" then
+    DisplayFurniture()
     DisplayRoomWalls()
     DisplayRoomBackground()
     DisplayQuestion()
@@ -110,6 +130,14 @@ function DisplayGame()
   end
   DisplayScore()
   DisplayPlayer()
+end
+
+function DisplayFurniture()
+
+  love.graphics.draw(images.stairs, 17, 200)
+  love.graphics.draw(images.monumentOne, 175, 300)
+  love.graphics.draw(images.monumentTwo, 625, 280)
+
 end
 
 function LoadImages()
@@ -125,6 +153,10 @@ function LoadImages()
   images.coin = love.graphics.newImage("assets/images/coin.png")
   images.scrollOpen = love.graphics.newImage("assets/images/scrollopen.png")
   images.scrollClosed = love.graphics.newImage("assets/images/scrollclosed.png")
+  images.key = love.graphics.newImage("assets/images/key.png")
+  images.stairs = love.graphics.newImage("assets/images/stairs.png")
+  images.monumentOne = love.graphics.newImage("assets/images/monumentOne.png")
+  images.monumentTwo = love.graphics.newImage("assets/images/monumentTwo.png")
 
   table.insert(wallImages, love.graphics.newImage("assets/images/wallOne.png"))
   table.insert(wallImages, love.graphics.newImage("assets/images/wallTwo.png"))
@@ -150,6 +182,7 @@ function DisplayQuestion()
 end
 
 function DisplayScrollInfo(scroll)
+
   love.graphics.setFont(fonts.zeldaInstructions)
   local yOrigin = 192
   local xOrigin = questionAreaMinX + scoreX
@@ -161,6 +194,7 @@ function DisplayScrollInfo(scroll)
     yOrigin,
     textWrapLimit,
     "left")
+
 end
 
 function DisplayStartScreen()
@@ -184,7 +218,7 @@ function DisplayScore (args)
   )
 end
 
-function DisplayEndInstructions ()
+function DisplayEndInstructions()
   love.graphics.setFont(fonts.zeldaInstructions)
   local yOrigin = 64
   local xOrigin = questionAreaMinX + scoreX
@@ -193,7 +227,7 @@ function DisplayEndInstructions ()
   if #scrolls == 0 then
     resultText = "You have succeeded in all your challenges and can now safely pass through the exit.\n\nWell done."
   else
-    resultText = "However, you have collected Scrolls of Wisdom during your trial.\n\nExamine each scroll the receive the enlightenment within."
+    resultText = "However, you have collected Scrolls of Wisdom during your trial. Pick up each scroll to receive the enlightenment within."
   end
   love.graphics.printf(
     "Congratulations adventurer ".. playerName .. "... You have completed your quest.\n\n"..resultText,
@@ -328,6 +362,7 @@ function SetupWindow()
   windowMaxY = 600
   questionAreaMinX = playingAreaMaxX + 64 -- Wall width
   questionAreaMaxX = windowMaxX
+  keyX = playingAreaMaxX / 2
 
   love.window.setMode(windowMaxX, windowMaxY)
 end

@@ -57,26 +57,11 @@ function CheckForOptionsScreen(key)
 
 end
 
-function CheckForTitleScreen(key)
-
-  if joystick then
-    if key == "start" then
-      gameState = "OptionsScreen"
-    end
-  end
-
-  if key == "return" then
-    gameState = "StartScreen"
-  end
-end
-
 function love.keyreleased(key)
   if gameState == "StartScreen" then
     CheckForOptionsScreen(key)
   elseif gameState == "OptionsScreen" then
     CheckForGameStart(key)
-  elseif gameState == "EndScreen" then
-    CheckForTitleScreen(key)
   end
 
 end
@@ -183,6 +168,26 @@ function UpdatePlayer()
     player.x = originalX
     player.y = originalY
   end
+
+  if ContactWithKey() then
+    gameState = "StartScreen"
+  end
+end
+
+function ContactWithKey()
+  if gameState ~= "EndScreen" then
+    return false
+  end
+
+  if AllScrollsRead() == false then
+    return false
+  end
+
+  if CollisionDetected(player.x, player.y, player.w, player.h, keyX, keyY, keyW, keyH) then
+    return true
+  end
+
+  return false
 end
 
 function GetMovementInput()
