@@ -313,7 +313,9 @@ end
 
 function DisplayPlayer()
 
+  --love.graphics.print(player.x .. "," .. player.y, player.x + 30, player.y + 30)
   love.graphics.draw(player.image, player.x, player.y)
+
 end
 
 function AlterTitleColours()
